@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (details.participants.length > 0) {
           participantsHTML = `
             <div class="participants-section">
-              <strong>Participants:</strong>
+              <strong>Participants (${details.participants.length}):</strong>
               <ul class="participants-list">
                 ${details.participants.map(p => `<li>${p}</li>`).join("")}
               </ul>
@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
           participantsHTML = `
             <div class="participants-section">
-              <strong>Participants:</strong>
+              <strong>Participants (0):</strong>
               <p class="no-participants">No participants yet.</p>
             </div>
           `;
@@ -83,6 +83,8 @@ document.addEventListener("DOMContentLoaded", () => {
         messageDiv.textContent = result.message;
         messageDiv.className = "success";
         signupForm.reset();
+        // Refresh the activities list to show updated participants
+        fetchActivities();
       } else {
         messageDiv.textContent = result.detail || "An error occurred";
         messageDiv.className = "error";
